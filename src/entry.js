@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {data} from './data.js';
 
+import Nav from './nav.js';
 import SpellDetail from './spelldetail.js';
 
 class Spell extends Component {
