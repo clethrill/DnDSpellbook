@@ -5,7 +5,7 @@ import {data} from './data.js';
 
 class Spell extends Component {
 	render() {
-		 return <li>{this.props.value}</li>
+		 return <li className="inline">{this.props.value}</li>
 	}
 }
 
@@ -45,11 +45,19 @@ class Main extends Component {
 		super (props);
 		this.state = {
 			spells: [
-				{name: "acid splash", level: 0, school: "abjuration"},
-				{name: "fireball", level: 4, school: "conjuration"},
-				{name: "firebolt", level: 0, school: "conjuration"}
+				{name: "acid splash", level: 0, school: "abjuration", id: 1},
+				{name: "fireball", level: 4, school: "conjuration", id: 2},
+				{name: "firebolt", level: 0, school: "conjuration", id: 3},
+				{name: "flame Breath", level: 2, school: "conjuration", id: 4},
+				{name: "mending", level: 1, school: "conjuration", id: 5}
 			],
-			input: ""
+			spellbook: [
+				{name: "Elmon's Spellbook", id: 1, spells: [1,2,3]},
+				{name: "Bard's Book", id: 2, spells: [1,3,5]}
+			],
+			search: ""
+			activeSpellbook: "";
+
 		};
 
 		function GETcall(url, callbacks) {
@@ -64,24 +72,36 @@ class Main extends Component {
 			});
 		}
 
-		GETcall("https://8ltronyol7.execute-api.ap-southeast-2.amazonaws.com/dev/hello", {
+		GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/get/spells", {
 			success: (data) => {console.log(data)},
 			error: (error) => {console.log(error)}
 		})
 
-		this.handleChange = this.handleChange.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+		this.handleSpellbook = this.handleSpellbook.bind(this);
 		this.spellList = this.spellList.bind(this);
 		this.loadList = this.loadList.bind(this);
 	}
 
-	handleChange(e) {
-		this.setState({input: e.target.value});
+	handleSearch(e) {
+		this.setState({Search: e.target.value.toLowerCase()});
+	}
+
+	handleSpellbook(e) {
+		this.setState({activeSpellbook: e.target.value});
 	}
 
 	spellList(level) {
 		let cantripList = this.state.spells.map((value, index) => {
-			if (value.name.indexOf(this.state.input) >= 0 && value.level == level)
-			return (<Spell value={value.name} key={index} />);
+			if (value.name.indexOf(this.state.search) >= 0 && value.level == level)
+			return (
+				<div>
+
+						<Spell value={value.name} key={index} />
+						<button type="button" className="btn btn-sm btn-success">Add</button>
+
+				</div>
+			);
 		});
 
 		return cantripList;
@@ -116,16 +136,30 @@ class Main extends Component {
 		});
 	}
 
+
+
 	render() {
 		let spells = [];
 		spells[0] = this.loadList("Cantrips", this.spellList(0));
-		spells[4] = this.loadList("Level 4", this.spellList(4));
+		spells[1] = this.loadList("Cantrips", this.spellList(0));
+		for (var i=0; i<10; i++) {
+			let name = "Level " + i;
+			if (i == 0) name = "Cantrips";
+			spells[i] = this.loadList(name, this.spellList(i));
+		}
+
 
 		return (
-			<div>
+			<div >
 				<Nav />
 				<h1>Spells {this.props.name}</h1>
-				<input values={this.state.input} onChange={this.handleChange} />
+				<input className="inline" value={this.state.search} onChange={this.handleSearch} />
+				<select className="inline" value={this.state.spellbook} onChange={this.handleSpellbook}>>
+					<option value="Sorcerer3">Sorcerer Level 3</option>
+					<option value="Gandalf">Gandalf Greybeard</option>
+					<option value="Bard">Bard Bard</option>
+					<option value="BlindMonk">Blind Monk</option>
+				</select>
 				{this.printSpells(spells)}
 	 	 	</div>
 

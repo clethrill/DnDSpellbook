@@ -78,7 +78,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'li',
-					null,
+					{ className: 'inline' },
 					this.props.value
 				);
 			}
@@ -166,7 +166,8 @@
 			var _this3 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 			_this3.state = {
-				spells: [{ name: "acid splash", level: 0, school: "abjuration" }, { name: "fireball", level: 4, school: "conjuration" }, { name: "firebolt", level: 0, school: "conjuration" }],
+				spells: [{ name: "acid splash", level: 0, school: "abjuration" }, { name: "fireball", level: 4, school: "conjuration" }, { name: "firebolt", level: 0, school: "conjuration" }, { name: "flame Breath", level: 2, school: "conjuration" }, { name: "mending", level: 1, school: "conjuration" }],
+				spellbook: "",
 				input: ""
 			};
 
@@ -182,7 +183,7 @@
 				});
 			}
 
-			GETcall("https://8ltronyol7.execute-api.ap-southeast-2.amazonaws.com/dev/hello", {
+			GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/get/spells", {
 				success: function success(data) {
 					console.log(data);
 				},
@@ -200,7 +201,7 @@
 		_createClass(Main, [{
 			key: 'handleChange',
 			value: function handleChange(e) {
-				this.setState({ input: e.target.value });
+				this.setState({ input: e.target.value.toLowerCase() });
 			}
 		}, {
 			key: 'spellList',
@@ -208,7 +209,16 @@
 				var _this4 = this;
 
 				var cantripList = this.state.spells.map(function (value, index) {
-					if (value.name.indexOf(_this4.state.input) >= 0 && value.level == level) return _react2.default.createElement(Spell, { value: value.name, key: index });
+					if (value.name.indexOf(_this4.state.input) >= 0 && value.level == level) return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(Spell, { value: value.name, key: index }),
+						_react2.default.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-sm btn-success' },
+							'Add'
+						)
+					);
 				});
 
 				return cantripList;
@@ -255,7 +265,12 @@
 			value: function render() {
 				var spells = [];
 				spells[0] = this.loadList("Cantrips", this.spellList(0));
-				spells[4] = this.loadList("Level 4", this.spellList(4));
+				spells[1] = this.loadList("Cantrips", this.spellList(0));
+				for (var i = 0; i < 10; i++) {
+					var name = "Level " + i;
+					if (i == 0) name = "Cantrips";
+					spells[i] = this.loadList(name, this.spellList(i));
+				}
 
 				return _react2.default.createElement(
 					'div',
@@ -267,7 +282,32 @@
 						'Spells ',
 						this.props.name
 					),
-					_react2.default.createElement('input', { values: this.state.input, onChange: this.handleChange }),
+					_react2.default.createElement('input', { className: 'inline', value: this.state.input, onChange: this.handleChange }),
+					_react2.default.createElement(
+						'select',
+						{ className: 'inline', value: this.state.spellbook, onChange: this.handleChange },
+						'>',
+						_react2.default.createElement(
+							'option',
+							{ value: 'Sorcerer3' },
+							'Sorcerer Level 3'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: 'Gandalf' },
+							'Gandalf Greybeard'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: 'Bard' },
+							'Bard Bard'
+						),
+						_react2.default.createElement(
+							'option',
+							{ value: 'BlindMonk' },
+							'Blind Monk'
+						)
+					),
 					this.printSpells(spells)
 				);
 			}
