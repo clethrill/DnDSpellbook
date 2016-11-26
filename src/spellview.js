@@ -1,5 +1,6 @@
+import React, {Component} from 'react';
 import {data} from './data.js';
-import {nav} from './nav.js';
+import nav from './nav.js';
 
 //{name: "Elmon's Spellbook", id: 1, spells: [1,2,3]},
 //{name: "Bard's Book", id: 2, spells: [1,3,5]}
