@@ -72,7 +72,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-nodejs/dev/1480145842884-2016-11-26T07:37:22.884Z/aws-nodejs.zip"
+          "S3Key": "serverless/aws-nodejs/dev/1480147906914-2016-11-26T08:11:46.914Z/aws-nodejs.zip"
         },
         "FunctionName": "aws-nodejs-dev-hello",
         "Handler": "handler.hello",
@@ -94,7 +94,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-nodejs/dev/1480145842884-2016-11-26T07:37:22.884Z/aws-nodejs.zip"
+          "S3Key": "serverless/aws-nodejs/dev/1480147906914-2016-11-26T08:11:46.914Z/aws-nodejs.zip"
         },
         "FunctionName": "aws-nodejs-dev-getSpells",
         "Handler": "handler.getSpells",
@@ -330,7 +330,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1480145842904": {
+    "ApiGatewayDeployment1480147906932": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {

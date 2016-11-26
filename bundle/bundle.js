@@ -169,20 +169,27 @@
 				spells: [{ name: "acid splash", level: 0, school: "abjuration" }, { name: "fireball", level: 4, school: "conjuration" }, { name: "firebolt", level: 0, school: "conjuration" }],
 				input: ""
 			};
-			/*
-	  function GETcall(url, callbacks) {
-	  	$.ajax({
-	  		url: url,
-	  				//this is a get call
-	  		type: 'GET',
-	  				success: callbacks.success ? callbacks.success : standard_callbacks.success,
-	  		error: callbacks.error ? callbacks.error : standard_callbacks.error
-	  	});
-	  }
-	  		GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
-	  	success: (data) => {console.log(data)},
-	  	error: (error) => {console.log(error)}
-	  }) */
+
+			function GETcall(url, callbacks) {
+				$.ajax({
+					url: url,
+
+					//this is a get call
+					type: 'GET',
+
+					success: callbacks.success ? callbacks.success : standard_callbacks.success,
+					error: callbacks.error ? callbacks.error : standard_callbacks.error
+				});
+			}
+
+			GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
+				success: function success(data) {
+					console.log(data);
+				},
+				error: function error(_error) {
+					console.log(_error);
+				}
+			});
 
 			_this3.handleChange = _this3.handleChange.bind(_this3);
 			_this3.spellList = _this3.spellList.bind(_this3);

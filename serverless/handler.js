@@ -14,20 +14,23 @@ var dynamo = new AWS.DynamoDB();
 module.exports.hello = (event, context, callback) => {
   const response = {
     statusCode: 200,
+	headers: {
+		'Access-Control-Allow-Origin': '*'
+	},
     body: JSON.stringify({
       message: 'Hello!?'
     }),
   };
 
   //callback(null, response);
-  context.succeed(response);
+  callback(response);
 
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
   // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
 };
 
 // Lambda Handler
-module.exports.getSpells = (event, context) => {
+module.exports.getSpells = (event, context, callback) => {
 	console.log('Received event:',JSON.stringify(event,null,2));
 	console.log('Context:',JSON.stringify(context,null,2));
 
@@ -41,6 +44,8 @@ module.exports.getSpells = (event, context) => {
 	// 		payload
 	// 	})
 	// });
+
+	console.log(callback);
 
 	console.log("BEFORE SCAN");
 	console.log(payload);

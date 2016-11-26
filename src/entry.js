@@ -49,7 +49,7 @@ class Main extends Component {
 			],
 			input: ""
 		};
-		/*
+
 		function GETcall(url, callbacks) {
 			$.ajax({
 				url: url,
@@ -65,7 +65,7 @@ class Main extends Component {
 		GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
 			success: (data) => {console.log(data)},
 			error: (error) => {console.log(error)}
-		}) */
+		})
 
 		this.handleChange = this.handleChange.bind(this);
 		this.spellList = this.spellList.bind(this);
