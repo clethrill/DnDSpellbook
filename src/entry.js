@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+import {data} from './data.js';
+
 class Spell extends Component {
 	render() {
 		 return <li>{this.props.value}</li>
