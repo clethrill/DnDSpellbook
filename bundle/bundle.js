@@ -64,30 +64,167 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Hello = function (_Component) {
-		_inherits(Hello, _Component);
+	var Spell = function (_Component) {
+		_inherits(Spell, _Component);
 
-		function Hello() {
-			_classCallCheck(this, Hello);
+		function Spell() {
+			_classCallCheck(this, Spell);
 
-			return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
+			return _possibleConstructorReturn(this, (Spell.__proto__ || Object.getPrototypeOf(Spell)).apply(this, arguments));
 		}
 
-		_createClass(Hello, [{
+		_createClass(Spell, [{
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'h1',
+					'li',
 					null,
-					'Hello World!'
+					this.props.value
 				);
 			}
 		}]);
 
-		return Hello;
+		return Spell;
 	}(_react.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(Hello, null), document.getElementById('content'));
+	var Nav = function (_Component2) {
+		_inherits(Nav, _Component2);
+
+		function Nav() {
+			_classCallCheck(this, Nav);
+
+			return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+		}
+
+		_createClass(Nav, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'nav',
+					{ className: 'navbar navbar-inverse navbar-fixed-top' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'container' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'navbar-header' },
+							_react2.default.createElement(
+								'button',
+								{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#navbar', 'aria-expanded': 'false', 'aria-controls': 'navbar' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'sr-only' },
+									'Toggle navigation'
+								),
+								_react2.default.createElement('span', { className: 'icon-bar' }),
+								_react2.default.createElement('span', { className: 'icon-bar' }),
+								_react2.default.createElement('span', { className: 'icon-bar' })
+							),
+							_react2.default.createElement(
+								'a',
+								{ className: 'navbar-brand', href: '#' },
+								'5e D&D SpellBook'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ id: 'navbar', className: 'navbar-collapse collapse' },
+							_react2.default.createElement(
+								'form',
+								{ className: 'navbar-form navbar-right' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group' },
+									_react2.default.createElement('input', { type: 'text', placeholder: 'Email', className: 'form-control' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group' },
+									_react2.default.createElement('input', { type: 'password', placeholder: 'Password', className: 'form-control' })
+								),
+								_react2.default.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-success' },
+									'Sign in'
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return Nav;
+	}(_react.Component);
+
+	var Main = function (_Component3) {
+		_inherits(Main, _Component3);
+
+		function Main(props) {
+			_classCallCheck(this, Main);
+
+			var _this3 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+
+			_this3.state = {
+				spells: ["Fireball", "Firebolt"]
+			};
+
+			function GETcall(url, callbacks) {
+				$.ajax({
+					// the url something like
+					/*
+	    	/api/echo
+	    */
+					url: url,
+
+					//this is a get call
+					type: 'GET',
+
+					success: callbacks.success ? callbacks.success : standard_callbacks.success,
+					error: callbacks.error ? callbacks.error : standard_callbacks.error
+				});
+			}
+
+			GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
+				success: function success(data) {
+					console.log(data);
+				},
+				error: function error(_error) {
+					console.log(_error);
+				}
+			});
+			return _this3;
+		}
+
+		_createClass(Main, [{
+			key: 'render',
+			value: function render() {
+				var spellList = this.state.spells.map(function (value, index) {
+					return _react2.default.createElement(Spell, { value: value, key: index });
+				});
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(Nav, null),
+					_react2.default.createElement(
+						'h1',
+						null,
+						'Spells ',
+						this.props.name
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						spellList
+					)
+				);
+			}
+		}]);
+
+		return Main;
+	}(_react.Component);
+
+	_reactDom2.default.render(_react2.default.createElement(Main, null), document.getElementById('content'));
 
 /***/ },
 /* 1 */
