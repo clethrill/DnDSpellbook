@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import {data} from './data.js';
 
+import SpellDetail from './spelldetail.js';
+
 class Spell extends Component {
 	render() {
 		return (
@@ -65,6 +67,7 @@ class Main extends Component {
 		this.handleSpellbook = this.handleSpellbook.bind(this);
 
 		this.goToSpell = this.goToSpell.bind(this);
+		this.goToList = this.goToList.bind(this);
 
 		this.spellList = this.spellList.bind(this);
 		this.loadList = this.loadList.bind(this);
@@ -73,13 +76,15 @@ class Main extends Component {
 	handleSearch(e) {
 		this.setState({search: e.target.value.toLowerCase()});
 	}
-
 	handleSpellbook(e) {
 		this.setState({activeSpellbook: e.target.value});
 	}
 
 	goToSpell(SpellId) {
 		this.setState({context: "spell", contextValue: SpellId});
+	}
+	goToList() {
+		this.setState({context: "list", contextValue: 0});
 	}
 
 	spellList(level) {
@@ -90,7 +95,6 @@ class Main extends Component {
 
 		return cantripList;
 	}
-
 	loadList(name, list, key) {
 		let newList = new Array();
 		for(var i = 0; i < list.length; i++) {
@@ -116,7 +120,6 @@ class Main extends Component {
 		}
 		return section;
 	}
-
 	printSpells(spellList) {
 		return spellList.map((value, index) =>{
 			return value;
@@ -140,25 +143,39 @@ class Main extends Component {
 			});
 		}
 
+		//switch content based on context
+		let content = false;
+		let backButton = false;
+		if (this.state.context == "list") {
+			content = (
+				<div>
+					<input className="inline" value={this.state.search} onChange={this.handleSearch} />
+					<select className="inline" value={this.state.activeSpellbook} onChange={this.handleSpellbook}>
+						{spellBookOptions}
+					</select>
+					{this.printSpells(spells)}
+				</div>
+			);
+		}
+		else if (this.state.context == "spell") {
+			content = (<SpellDetail data={this.state.spells[this.state.contextValue-1]} />);
+			backButton = (<span onClick={this.goToList}>Back</span>);
+		}
+
 		return (
 			<main>
 				<Nav />
 				<div className="row">
-					<div className="col-xs-12">
-						<h1>Spells {this.state.context + this.state.contextValue}</h1>
+					<div className="col-xs-8">
+						<h1>Spells</h1>
+					</div>
+					<div className="col-xs-4">
+						{backButton}
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-xs-12">
-						<input className="inline" value={this.state.search} onChange={this.handleSearch} />
-						<select className="inline" value={this.state.activeSpellbook} onChange={this.handleSpellbook}>
-							{spellBookOptions}
-						</select>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-xs-12">
-						{this.printSpells(spells)}
+						{content}
 					</div>
 				</div>
 	 	 	</main>
