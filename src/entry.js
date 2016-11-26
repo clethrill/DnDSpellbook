@@ -62,7 +62,7 @@ class Main extends Component {
 			});
 		}
 
-		GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
+		GETcall("https://8ltronyol7.execute-api.ap-southeast-2.amazonaws.com/dev/hello", {
 			success: (data) => {console.log(data)},
 			error: (error) => {console.log(error)}
 		})
