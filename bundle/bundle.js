@@ -166,42 +166,90 @@
 			var _this3 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 			_this3.state = {
-				spells: ["Fireball", "Firebolt"]
+				spells: [{ name: "acid splash", level: 0, school: "abjuration" }, { name: "fireball", level: 4, school: "conjuration" }, { name: "firebolt", level: 0, school: "conjuration" }],
+				input: ""
 			};
+			/*
+	  function GETcall(url, callbacks) {
+	  	$.ajax({
+	  		url: url,
+	  				//this is a get call
+	  		type: 'GET',
+	  				success: callbacks.success ? callbacks.success : standard_callbacks.success,
+	  		error: callbacks.error ? callbacks.error : standard_callbacks.error
+	  	});
+	  }
+	  		GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
+	  	success: (data) => {console.log(data)},
+	  	error: (error) => {console.log(error)}
+	  }) */
 
-			function GETcall(url, callbacks) {
-				$.ajax({
-					// the url something like
-					/*
-	    	/api/echo
-	    */
-					url: url,
-
-					//this is a get call
-					type: 'GET',
-
-					success: callbacks.success ? callbacks.success : standard_callbacks.success,
-					error: callbacks.error ? callbacks.error : standard_callbacks.error
-				});
-			}
-
-			GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/hello", {
-				success: function success(data) {
-					console.log(data);
-				},
-				error: function error(_error) {
-					console.log(_error);
-				}
-			});
+			_this3.handleChange = _this3.handleChange.bind(_this3);
+			_this3.spellList = _this3.spellList.bind(_this3);
+			_this3.loadList = _this3.loadList.bind(_this3);
 			return _this3;
 		}
 
 		_createClass(Main, [{
+			key: 'handleChange',
+			value: function handleChange(e) {
+				this.setState({ input: e.target.value });
+			}
+		}, {
+			key: 'spellList',
+			value: function spellList(level) {
+				var _this4 = this;
+
+				var cantripList = this.state.spells.map(function (value, index) {
+					if (value.name.indexOf(_this4.state.input) >= 0 && value.level == level) return _react2.default.createElement(Spell, { value: value.name, key: index });
+				});
+
+				return cantripList;
+			}
+		}, {
+			key: 'loadList',
+			value: function loadList(name, list, section) {
+				var newList = new Array();
+				for (var i = 0; i < list.length; i++) {
+					if (list[i]) {
+						newList.push(list[i]);
+					}
+				}
+
+				console.log(name, newList);
+				var section;
+				if (newList.length > 0) {
+					section = _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							name
+						),
+						_react2.default.createElement(
+							'ul',
+							null,
+							newList
+						)
+					);
+				}
+				return section;
+			}
+		}, {
+			key: 'printSpells',
+			value: function printSpells(spellList) {
+				return spellList.map(function (value, index) {
+					return value;
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var spellList = this.state.spells.map(function (value, index) {
-					return _react2.default.createElement(Spell, { value: value, key: index });
-				});
+				var spells = [];
+				spells[0] = this.loadList("Cantrips", this.spellList(0));
+				spells[4] = this.loadList("Level 4", this.spellList(4));
+
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -212,11 +260,8 @@
 						'Spells ',
 						this.props.name
 					),
-					_react2.default.createElement(
-						'ul',
-						null,
-						spellList
-					)
+					_react2.default.createElement('input', { values: this.state.input, onChange: this.handleChange }),
+					this.printSpells(spells)
 				);
 			}
 		}]);
