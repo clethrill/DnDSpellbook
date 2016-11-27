@@ -56,6 +56,20 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _data = __webpack_require__(178);
+
+	var _nav = __webpack_require__(180);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	var _spelldetail = __webpack_require__(179);
+
+	var _spelldetail2 = _interopRequireDefault(_spelldetail);
+
+	var _spellbook = __webpack_require__(181);
+
+	var _spellbook2 = _interopRequireDefault(_spellbook);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -77,9 +91,22 @@
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'li',
-					{ className: 'inline' },
-					this.props.value
+					'div',
+					{ className: 'row' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col-xs-8', onClick: this.props.handleClick },
+						this.props.value.Name
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'col-xs-4' },
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.props.handleAdd },
+							'Add'
+						)
+					)
 				);
 			}
 		}]);
@@ -87,145 +114,88 @@
 		return Spell;
 	}(_react.Component);
 
-	var Nav = function (_Component2) {
-		_inherits(Nav, _Component2);
-
-		function Nav() {
-			_classCallCheck(this, Nav);
-
-			return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
-		}
-
-		_createClass(Nav, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'nav',
-					{ className: 'navbar navbar-inverse navbar-fixed-top' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'container' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'navbar-header' },
-							_react2.default.createElement(
-								'button',
-								{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#navbar', 'aria-expanded': 'false', 'aria-controls': 'navbar' },
-								_react2.default.createElement(
-									'span',
-									{ className: 'sr-only' },
-									'Toggle navigation'
-								),
-								_react2.default.createElement('span', { className: 'icon-bar' }),
-								_react2.default.createElement('span', { className: 'icon-bar' }),
-								_react2.default.createElement('span', { className: 'icon-bar' })
-							),
-							_react2.default.createElement(
-								'a',
-								{ className: 'navbar-brand', href: '#' },
-								'5e D&D SpellBook'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'navbar', className: 'navbar-collapse collapse' },
-							_react2.default.createElement(
-								'form',
-								{ className: 'navbar-form navbar-right' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'form-group' },
-									_react2.default.createElement('input', { type: 'text', placeholder: 'Email', className: 'form-control' })
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'form-group' },
-									_react2.default.createElement('input', { type: 'password', placeholder: 'Password', className: 'form-control' })
-								),
-								_react2.default.createElement(
-									'button',
-									{ type: 'submit', className: 'btn btn-success' },
-									'Sign in'
-								)
-							)
-						)
-					)
-				);
-			}
-		}]);
-
-		return Nav;
-	}(_react.Component);
-
-	var Main = function (_Component3) {
-		_inherits(Main, _Component3);
+	var Main = function (_Component2) {
+		_inherits(Main, _Component2);
 
 		function Main(props) {
 			_classCallCheck(this, Main);
 
-			var _this3 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+			var _this2 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-			_this3.state = {
-				spells: [{ name: "acid splash", level: 0, school: "abjuration" }, { name: "fireball", level: 4, school: "conjuration" }, { name: "firebolt", level: 0, school: "conjuration" }, { name: "flame Breath", level: 2, school: "conjuration" }, { name: "mending", level: 1, school: "conjuration" }],
-				spellbook: "",
-				input: ""
+			_this2.state = {
+				spells: _data.data,
+				spellbook: _data.books,
+				search: "",
+				activeSpellbook: 1,
+				context: "list", //list, spell, book
+				contextValue: 0 //id of spell or book
 			};
 
-			function GETcall(url, callbacks) {
-				$.ajax({
-					url: url,
+			_this2.handleSearch = _this2.handleSearch.bind(_this2);
+			_this2.handleSpellbook = _this2.handleSpellbook.bind(_this2);
 
-					//this is a get call
-					type: 'GET',
+			_this2.goToSpell = _this2.goToSpell.bind(_this2);
+			_this2.goToBook = _this2.goToBook.bind(_this2);
+			_this2.goToList = _this2.goToList.bind(_this2);
 
-					success: callbacks.success ? callbacks.success : standard_callbacks.success,
-					error: callbacks.error ? callbacks.error : standard_callbacks.error
-				});
-			}
+			_this2.addSpell = _this2.addSpell.bind(_this2);
 
-			GETcall("https://te3fmtf49g.execute-api.ap-southeast-2.amazonaws.com/dev/api/get/spells", {
-				success: function success(data) {
-					console.log(data);
-				},
-				error: function error(_error) {
-					console.log(_error);
-				}
-			});
-
-			_this3.handleChange = _this3.handleChange.bind(_this3);
-			_this3.spellList = _this3.spellList.bind(_this3);
-			_this3.loadList = _this3.loadList.bind(_this3);
-			return _this3;
+			_this2.spellList = _this2.spellList.bind(_this2);
+			_this2.loadList = _this2.loadList.bind(_this2);
+			return _this2;
 		}
 
 		_createClass(Main, [{
-			key: 'handleChange',
-			value: function handleChange(e) {
-				this.setState({ input: e.target.value.toLowerCase() });
+			key: 'handleSearch',
+			value: function handleSearch(e) {
+				this.setState({ search: e.target.value.toLowerCase() });
+			}
+		}, {
+			key: 'handleSpellbook',
+			value: function handleSpellbook(e) {
+				this.setState({ activeSpellbook: e.target.value });
+			}
+		}, {
+			key: 'goToSpell',
+			value: function goToSpell(SpellId) {
+				this.setState({ context: "spell", contextValue: SpellId });
+			}
+		}, {
+			key: 'goToBook',
+			value: function goToBook(BookId) {
+				this.setState({ context: "book", contextValue: BookId });
+			}
+		}, {
+			key: 'goToList',
+			value: function goToList() {
+				this.setState({ context: "list", contextValue: 0 });
+			}
+		}, {
+			key: 'addSpell',
+			value: function addSpell(SpellId) {
+				var arr = this.state.spellbook;
+				arr[this.state.activeSpellbook - 1].Spells.push(SpellId);
+				this.setState({ spellbook: arr });
 			}
 		}, {
 			key: 'spellList',
 			value: function spellList(level) {
-				var _this4 = this;
+				var _this3 = this;
 
 				var cantripList = this.state.spells.map(function (value, index) {
-					if (value.name.indexOf(_this4.state.input) >= 0 && value.level == level) return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(Spell, { value: value.name, key: index }),
-						_react2.default.createElement(
-							'button',
-							{ type: 'button', className: 'btn btn-sm btn-success' },
-							'Add'
-						)
-					);
+					if (value.Name.indexOf(_this3.state.search) >= 0 && value.Level == level) return _react2.default.createElement(Spell, {
+						value: value,
+						key: index,
+						handleClick: _this3.goToSpell.bind(_this3, value.SpellId),
+						handleAdd: _this3.addSpell.bind(_this3, value.SpellId)
+					});
 				});
 
 				return cantripList;
 			}
 		}, {
 			key: 'loadList',
-			value: function loadList(name, list, section) {
+			value: function loadList(name, list, key) {
 				var newList = new Array();
 				for (var i = 0; i < list.length; i++) {
 					if (list[i]) {
@@ -233,21 +203,28 @@
 					}
 				}
 
-				console.log(name, newList);
 				var section;
 				if (newList.length > 0) {
 					section = _react2.default.createElement(
 						'div',
-						null,
+						{ key: key, className: 'row' },
 						_react2.default.createElement(
-							'h2',
-							null,
-							name
-						),
-						_react2.default.createElement(
-							'ul',
-							null,
-							newList
+							'div',
+							{ className: 'col-xs-12' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								name
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'row' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'col-xs-12' },
+									newList
+								)
+							)
 						)
 					);
 				}
@@ -263,52 +240,112 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				//spell view
 				var spells = [];
-				spells[0] = this.loadList("Cantrips", this.spellList(0));
-				spells[1] = this.loadList("Cantrips", this.spellList(0));
 				for (var i = 0; i < 10; i++) {
 					var name = "Level " + i;
 					if (i == 0) name = "Cantrips";
-					spells[i] = this.loadList(name, this.spellList(i));
+					spells[i] = this.loadList(name, this.spellList(i), i);
+				}
+
+				//spellbook options
+				var spellBookOptions = false;
+				if (this.state.spellbook.length > 0) {
+					spellBookOptions = this.state.spellbook.map(function (value, index) {
+						return _react2.default.createElement(
+							'option',
+							{ key: index, value: value.BookId },
+							value.Name
+						);
+					});
+				}
+
+				//switch content based on context
+				var content = false;
+				var backButton = false;
+				if (this.state.context == "list") {
+					content = _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-xs-4' },
+								_react2.default.createElement('input', { className: 'inline', value: this.state.search, onChange: this.handleSearch })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-xs-4' },
+								_react2.default.createElement(
+									'select',
+									{ className: 'inline', value: this.state.activeSpellbook, onChange: this.handleSpellbook },
+									spellBookOptions
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-xs-4' },
+								_react2.default.createElement(
+									'button',
+									{ onClick: this.goToBook.bind(this, this.state.activeSpellbook) },
+									'View Book'
+								)
+							)
+						),
+						this.printSpells(spells)
+					);
+				} else if (this.state.context == "spell") {
+					content = _react2.default.createElement(_spelldetail2.default, { data: this.state.spells[this.state.contextValue - 1] });
+					backButton = _react2.default.createElement(
+						'span',
+						{ onClick: this.goToList },
+						'Back'
+					);
+				} else if (this.state.context == "book") {
+					content = _react2.default.createElement(_spellbook2.default, {
+						data: this.state.spellbook[this.state.contextValue - 1],
+						spellData: this.state.spells
+					});
+					backButton = _react2.default.createElement(
+						'span',
+						{ onClick: this.goToList },
+						'Back'
+					);
 				}
 
 				return _react2.default.createElement(
-					'div',
+					'main',
 					null,
-					_react2.default.createElement(Nav, null),
+					_react2.default.createElement(_nav2.default, null),
 					_react2.default.createElement(
-						'h1',
-						null,
-						'Spells ',
-						this.props.name
-					),
-					_react2.default.createElement('input', { className: 'inline', value: this.state.input, onChange: this.handleChange }),
-					_react2.default.createElement(
-						'select',
-						{ className: 'inline', value: this.state.spellbook, onChange: this.handleChange },
-						'>',
+						'div',
+						{ className: 'row' },
 						_react2.default.createElement(
-							'option',
-							{ value: 'Sorcerer3' },
-							'Sorcerer Level 3'
+							'div',
+							{ className: 'col-xs-8' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'Spells'
+							)
 						),
 						_react2.default.createElement(
-							'option',
-							{ value: 'Gandalf' },
-							'Gandalf Greybeard'
-						),
-						_react2.default.createElement(
-							'option',
-							{ value: 'Bard' },
-							'Bard Bard'
-						),
-						_react2.default.createElement(
-							'option',
-							{ value: 'BlindMonk' },
-							'Blind Monk'
+							'div',
+							{ className: 'col-xs-4' },
+							backButton
 						)
 					),
-					this.printSpells(spells)
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-xs-12' },
+							content
+						)
+					)
 				);
 			}
 		}]);
@@ -21724,6 +21761,475 @@
 
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var data = [{
+		SpellId: 1,
+		Name: "acid splash",
+		Level: 0,
+		School: "abjuration",
+		Classes: ["sorcerer", "wizard"],
+		Range: "60 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.",
+		LevelUpDescription: "This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+	}, {
+		SpellId: 2,
+		Name: "chill touch",
+		Level: 0,
+		School: "necromancy",
+		Classes: ["sorcerer", "warlock", "wizard"],
+		Range: "120 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "1 round",
+		Description: "You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can’t regain hit points until the start of your next turn. Until then, the hand clings to the target. If you hit an undead target, it also has disadvantage on attack rolls against you until the end of your next turn.",
+		LevelUpDescription: "This spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
+	}, {
+		SpellId: 3,
+		Name: "absorb elements",
+		Level: 1,
+		School: "abjuration",
+		Classes: ["druid", "ranger", "wizard"],
+		Range: "self",
+		CastingTime: "1 reaction, which you take when you take acid, cold, fire, lightning, or thunder damage",
+		ComponentsVocal: false,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "1 round",
+		Description: "The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st."
+	}, {
+		SpellId: 4,
+		Name: "catapult",
+		Level: 1,
+		School: "transmutation",
+		Classes: ["sorcerer", "wizard"],
+		Range: "150 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: false,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "Choose one object weighing 1 to 5 pounds within range that isn’t being worn or carried. The object flies in a straight line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface. If the object would strike a creature, that creature must make a Dexterity saving throw. On a failed save, the object strikes the target and stops moving. In either case, both the object and the creature or solid surface take 3d8 bludgeoning damage.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 2nd level or higher, the maximum weight of objects that you can target with this spell increases by 5 pounds, and the damage increases by 1d8, for each slot level above 1st."
+	}, {
+		SpellId: 5,
+		Name: "invisibility",
+		Level: 2,
+		School: "illusion",
+		Classes: ["bard", "sorcerer", "warlock", "wizard"],
+		Range: "touch",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: true,
+		ComponentsMaterialExtra: "an eyelash encased in gum arabic",
+		Duration: "concentration, up to 1 hour",
+		Description: "A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd."
+	}, {
+		SpellId: 6,
+		Name: "firebolt",
+		Level: 0,
+		School: "evocation",
+		Classes: ["sorcerer", "wizard"],
+		Range: "120 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.",
+		LevelUpDescription: "This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10)."
+	}, {
+		SpellId: 7,
+		Name: "sword burst",
+		Level: 0,
+		School: "conjuration",
+		Classes: ["sorcerer", "warlock", "wizard"],
+		Range: "5 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: false,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You create a momentary circle of spectral blades that sweep around you. Each creature within range, other than you, must succeed on a Dexterity saving throw or take 1d6 force damage.",
+		LevelUpDescription: "This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+	}, {
+		SpellId: 8,
+		Name: "vicious mockery",
+		Level: 0,
+		School: "enchantment",
+		Classes: ["bard"],
+		Range: "60 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: false,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.",
+		LevelUpDescription: "This spell’s damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4)."
+	}, {
+		SpellId: 9,
+		Name: "bane",
+		Level: 1,
+		School: "enchantment",
+		Classes: ["bard", "cleric"],
+		Range: "30 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: true,
+		ComponentsMaterialExtra: "a drop of blood",
+		Duration: "Concentration, up to 1 minute",
+		Description: "Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
+	}, {
+		SpellId: 10,
+		Name: "false life",
+		Level: 1,
+		School: "necromancy",
+		Classes: ["sorcerer", "wizard"],
+		Range: "Self",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: true,
+		ComponentsMaterialExtra: "a small amount of alcohol or distilled spirits",
+		Duration: "1 hour",
+		Description: "Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional temporary hit points for each slot level above 1st."
+	}, {
+		SpellId: 11,
+		Name: "scorching ray",
+		Level: 2,
+		School: "evocation",
+		Classes: ["sorcerer", "wizard"],
+		Range: "120 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.",
+		LevelUpDescription: "When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd."
+	}, {
+		SpellId: 12,
+		Name: "dimension door",
+		Level: 4,
+		School: "conjuration",
+		Classes: ["sorcerer", "wizard"],
+		Range: "500 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: false,
+		ComponentsMaterial: false,
+		ComponentsMaterialExtra: undefined,
+		Duration: "instantaneous",
+		Description: "You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as “200 feet straight downward” or “upward to the northwest at a 45-degree angle, 300 feet. You can bring along objects as long as their weight doesn’t exceed what you can carry. You can also bring one willing creature of your size or smaller who is carrying gear up to its carrying capacity. The creature must be within 5 feet of you when you cast this spell. If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take 4d6 force damage, and the spell fails to teleport you.",
+		LevelUpDescription: undefined
+	}, {
+		SpellId: 13,
+		Name: "polymorph",
+		Level: 4,
+		School: "transmutation",
+		Classes: ["bard", "druid", "sorcerer", "wizard"],
+		Range: "60 feet",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: true,
+		ComponentsMaterialExtra: "a caterpillar cocoon",
+		Duration: "Concentration, up to 1 hour",
+		Description: "This spell transforms a creature that you can see within range into a new form. An unwilling creature must make a Wisdom saving throw to avoid the effect. A shapechanger automatically succeeds on this saving throw. The transformation lasts for the duration, or until the target drops to 0 hit points or dies. The new form can be any beast whose challenge rating is equal to or less than the target’s (or the target’s level, if it doesn’t have a challenge rating). The target’s game statistics, including mental ability scores, are replaced by the statistics of the chosen beast. It retains its alignment and personality. The target assumes the hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 hit points, any excess damage carries over to its normal form. As long as the excess damage doesn’t reduce the creature’s normal form to 0 hit points, it isn’t knocked unconscious. The creature is limited in the actions it can perform by the nature of its new form, and it can’t speak, cast spells, or take any other action that requires hands or speech. The target’s gear melds into the new form. The creature can’t activate, use, wield, or otherwise benefit from any of its equipment.",
+		LevelUpDescription: undefined
+	}, {
+		SpellId: 14,
+		Name: "Dream",
+		Level: 5,
+		School: "illusion",
+		Classes: ["bard", "warlock", "wizard"],
+		Range: "Special",
+		CastingTime: "1 action",
+		ComponentsVocal: true,
+		ComponentsSomatic: true,
+		ComponentsMaterial: true,
+		ComponentsMaterialExtra: "a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",
+		Duration: "8 hours",
+		Description: "This spell shapes a creature’s dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don’t sleep, such as elves, can’t be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can’t take actions or move. If the target is asleep, the messenger appears in the target’s dreams and can converse with the target as long as it remains asleep, through the duration of the spell. The messenger can also shape the environment of the dream, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target’s dreams. You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a Wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the duration of the target’s sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage. If you have a body part, lock of hair, clipping from a nail, or similar portion of the target’s body, the target makes its saving throw with disadvantage.",
+		LevelUpDescription: undefined
+	}];
+
+	var books = [{ Name: "Elmon's Spellbook", BookId: 1, Spells: [1, 2, 3] }, { Name: "Bard's Book", BookId: 2, Spells: [1, 3, 5] }];
+
+	exports.data = data;
+	exports.books = books;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SpellDetail = function (_Component) {
+		_inherits(SpellDetail, _Component);
+
+		function SpellDetail() {
+			_classCallCheck(this, SpellDetail);
+
+			return _possibleConstructorReturn(this, (SpellDetail.__proto__ || Object.getPrototypeOf(SpellDetail)).apply(this, arguments));
+		}
+
+		_createClass(SpellDetail, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"section",
+					null,
+					_react2.default.createElement(
+						"div",
+						{ className: "row" },
+						_react2.default.createElement(
+							"div",
+							{ className: "col-xs-12" },
+							_react2.default.createElement(
+								"h2",
+								null,
+								this.props.data.Name
+							)
+						)
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "row" },
+						_react2.default.createElement(
+							"div",
+							{ className: "col-xs-12" },
+							this.props.data.Description
+						)
+					)
+				);
+			}
+		}]);
+
+		return SpellDetail;
+	}(_react.Component);
+
+	exports.default = SpellDetail;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Nav = function (_Component) {
+		_inherits(Nav, _Component);
+
+		function Nav() {
+			_classCallCheck(this, Nav);
+
+			return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+		}
+
+		_createClass(Nav, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"nav",
+					{ className: "navbar navbar-inverse navbar-fixed-top" },
+					_react2.default.createElement(
+						"div",
+						{ className: "container" },
+						_react2.default.createElement(
+							"div",
+							{ className: "navbar-header" },
+							_react2.default.createElement(
+								"button",
+								{ type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#navbar", "aria-expanded": "false", "aria-controls": "navbar" },
+								_react2.default.createElement(
+									"span",
+									{ className: "sr-only" },
+									"Toggle navigation"
+								),
+								_react2.default.createElement("span", { className: "icon-bar" }),
+								_react2.default.createElement("span", { className: "icon-bar" }),
+								_react2.default.createElement("span", { className: "icon-bar" })
+							),
+							_react2.default.createElement(
+								"a",
+								{ className: "navbar-brand", href: "#" },
+								"5e D&D SpellBook"
+							)
+						),
+						_react2.default.createElement(
+							"div",
+							{ id: "navbar", className: "navbar-collapse collapse" },
+							_react2.default.createElement(
+								"form",
+								{ className: "navbar-form navbar-right" },
+								_react2.default.createElement(
+									"div",
+									{ className: "form-group" },
+									_react2.default.createElement("input", { type: "text", placeholder: "Email", className: "form-control" })
+								),
+								_react2.default.createElement(
+									"div",
+									{ className: "form-group" },
+									_react2.default.createElement("input", { type: "password", placeholder: "Password", className: "form-control" })
+								),
+								_react2.default.createElement(
+									"button",
+									{ type: "submit", className: "btn btn-success" },
+									"Sign in"
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return Nav;
+	}(_react.Component);
+
+	exports.default = Nav;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _spelldetail = __webpack_require__(179);
+
+	var _spelldetail2 = _interopRequireDefault(_spelldetail);
+
+	var _nav = __webpack_require__(180);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SpellBook = function (_Component) {
+		_inherits(SpellBook, _Component);
+
+		function SpellBook(props) {
+			_classCallCheck(this, SpellBook);
+
+			var _this = _possibleConstructorReturn(this, (SpellBook.__proto__ || Object.getPrototypeOf(SpellBook)).call(this, props));
+
+			_this.state = {
+				spellData: _this.props.spellData,
+				BookId: _this.props.data.BookId,
+				Name: _this.props.data.Name,
+				Spells: _this.props.data.Spells
+			};
+
+			return _this;
+		}
+
+		_createClass(SpellBook, [{
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				var spells = this.state.Spells.map(function (value, index) {
+					return _react2.default.createElement(_spelldetail2.default, { data: _this2.state.spellData[value - 1] });
+				});
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h2',
+						null,
+						this.state.Name
+					),
+					spells
+				);
+			}
+		}]);
+
+		return SpellBook;
+	}(_react.Component);
+
+	exports.default = SpellBook;
 
 /***/ }
 /******/ ]);

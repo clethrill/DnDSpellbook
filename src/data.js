@@ -225,4 +225,9 @@ var data = [
 	}
 ];
 
-export {data};
+var books = [
+	{Name: "Elmon's Spellbook", BookId: 1, Spells: [1,2,3]},
+	{Name: "Bard's Book", BookId: 2, Spells: [1,3,5]}
+]
+
+export {data, books};
