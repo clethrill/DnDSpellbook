@@ -1,0 +1,45 @@
+button, .button {
+	width: 100%;
+}
+
+input, textarea, select, fieldset {
+	width: 100%;
+}
+
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+	padding: 0 8px;
+}
+
+h1 {
+	text-align: center;
+	margin: 10px 0;
+}
+.spacer {
+	height: 26px;
+}
+
+table {
+	width: 100%;
+}
+tbody tr {
+	cursor: pointer;
+}
+tbody tr:hover {
+	background-color: rgba(51, 195, 240, 0.15);
+}
+
+label {
+	text-align: right;
+}
+
+.capitalise {
+	text-transform: capitalize;
+}
+.vertical-center {
+	line-height: 38px;
+}
+.subheading {
+    font-style: italic;
+    color: #999;
+    font-size: 1.6rem;
+}
