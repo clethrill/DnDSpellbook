@@ -265,118 +265,239 @@ var data = [
 		],
 		level_up_description: "This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
 	},
-	// {
-	// 	spell_id: 8,
-	// 	name: "vicious mockery",
-	// 	level: 0,
-	// 	school: "enchantment",
-	// 	classes: ["bard"],
-	// 	range: "60 feet",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: false,
-	// 	ComponentsMaterial: false,
-	// 	ComponentsMaterialExtra: undefined,
-	// 	duration: "instantaneous",
-	// 	description: "You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.",
-	// 	level_up_description: "This spell’s damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4)."
-	// },
-	// {
-	// 	spell_id: 9,
-	// 	name: "bane",
-	// 	level: 1,
-	// 	school: "enchantment",
-	// 	classes: ["bard", "cleric"],
-	// 	range: "30 feet",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: true,
-	// 	ComponentsMaterial: true,
-	// 	ComponentsMaterialExtra: "a drop of blood",
-	// 	duration: "Concentration, up to 1 minute",
-	// 	description: "Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.",
-	// 	level_up_description: "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
-	// },
-	// {
-	// 	spell_id: 10,
-	// 	name: "false life",
-	// 	level: 1,
-	// 	school: "necromancy",
-	// 	classes: ["sorcerer", "wizard"],
-	// 	range: "Self",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: true,
-	// 	ComponentsMaterial: true,
-	// 	ComponentsMaterialExtra: "a small amount of alcohol or distilled spirits",
-	// 	duration: "1 hour",
-	// 	description: "Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.",
-	// 	level_up_description: "When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional temporary hit points for each slot level above 1st."
-	// },
-	// {
-	// 	spell_id: 11,
-	// 	name: "scorching ray",
-	// 	level: 2,
-	// 	school: "evocation",
-	// 	classes: ["sorcerer", "wizard"],
-	// 	range: "120 feet",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: true,
-	// 	ComponentsMaterial: false,
-	// 	ComponentsMaterialExtra: undefined,
-	// 	duration: "instantaneous",
-	// 	description: "You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.",
-	// 	level_up_description: "When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd."
-	// },
-	// {
-	// 	spell_id: 12,
-	// 	name: "dimension door",
-	// 	level: 4,
-	// 	school: "conjuration",
-	// 	classes: ["sorcerer", "wizard"],
-	// 	range: "500 feet",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: false,
-	// 	ComponentsMaterial: false,
-	// 	ComponentsMaterialExtra: undefined,
-	// 	duration: "instantaneous",
-	// 	description: "You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as “200 feet straight downward” or “upward to the northwest at a 45-degree angle, 300 feet. You can bring along objects as long as their weight doesn’t exceed what you can carry. You can also bring one willing creature of your size or smaller who is carrying gear up to its carrying capacity. The creature must be within 5 feet of you when you cast this spell. If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take 4d6 force damage, and the spell fails to teleport you.",
-	// 	level_up_description: undefined
-	// },
-	// {
-	// 	spell_id: 13,
-	// 	name: "polymorph",
-	// 	level: 4,
-	// 	school: "transmutation",
-	// 	classes: ["bard", "druid", "sorcerer", "wizard"],
-	// 	range: "60 feet",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: true,
-	// 	ComponentsMaterial: true,
-	// 	ComponentsMaterialExtra: "a caterpillar cocoon",
-	// 	duration: "Concentration, up to 1 hour",
-	// 	description: "This spell transforms a creature that you can see within range into a new form. An unwilling creature must make a Wisdom saving throw to avoid the effect. A shapechanger automatically succeeds on this saving throw. The transformation lasts for the duration, or until the target drops to 0 hit points or dies. The new form can be any beast whose challenge rating is equal to or less than the target’s (or the target’s level, if it doesn’t have a challenge rating). The target’s game statistics, including mental ability scores, are replaced by the statistics of the chosen beast. It retains its alignment and personality. The target assumes the hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 hit points, any excess damage carries over to its normal form. As long as the excess damage doesn’t reduce the creature’s normal form to 0 hit points, it isn’t knocked unconscious. The creature is limited in the actions it can perform by the nature of its new form, and it can’t speak, cast spells, or take any other action that requires hands or speech. The target’s gear melds into the new form. The creature can’t activate, use, wield, or otherwise benefit from any of its equipment.",
-	// 	level_up_description: undefined
-	// },
-	// {
-	// 	spell_id: 14,
-	// 	name: "Dream",
-	// 	level: 5,
-	// 	school: "illusion",
-	// 	classes: ["bard", "warlock", "wizard"],
-	// 	range: "Special",
-	// 	casting_time: "1 action",
-	// 	ComponentsVocal: true,
-	// 	ComponentsSomatic: true,
-	// 	ComponentsMaterial: true,
-	// 	ComponentsMaterialExtra: "a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",
-	// 	duration: "8 hours",
-	// 	description: "This spell shapes a creature’s dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don’t sleep, such as elves, can’t be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can’t take actions or move. If the target is asleep, the messenger appears in the target’s dreams and can converse with the target as long as it remains asleep, through the duration of the spell. The messenger can also shape the environment of the dream, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target’s dreams. You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a Wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the duration of the target’s sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage. If you have a body part, lock of hair, clipping from a nail, or similar portion of the target’s body, the target makes its saving throw with disadvantage.",
-	// 	level_up_description: undefined
-	// }
+	{
+		spell_id: 8,
+		name: "vicious mockery",
+		level: {
+			value: 0,
+			text: "cantrip"
+		},
+		school: SCHOOLS.ENCHANTMENT,
+		classes: [CLASS_NAMES.BARD],
+		range: {
+			type: RANGE_TYPES.RANGE,
+			text: "60 feet",
+			value: 60,
+			unit: "feet"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: false,
+			material: false,
+			extra: null,
+			text: "V"
+		},
+		duration: {
+			type: DURATION_TYPES.INSTANTANEOUS,
+			text: "instantaneous"
+		},
+		description: [
+			"You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn."
+		],
+		level_up_description: "This spell’s damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4)."
+	},
+	{
+		spell_id: 9,
+		name: "bane",
+		level: {
+			value: 1,
+			text: "1st Level"
+		},
+		school: SCHOOLS.ENCHANTMENT,
+		classes: [CLASS_NAMES.BARD, CLASS_NAMES.CLERIC],
+		range: {
+			type: RANGE_TYPES.RANGE,
+			text: "30 feet",
+			value: 30,
+			unit: "feet"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: true,
+			material: true,
+			extra: "a drop of blood",
+			text: "V, S, M (a drop of blood)"
+		},
+		duration: {
+			type: DURATION_TYPES.CONCENTRATION,
+			text: "concentration, up to 1 minute",
+			value: 1,
+			unit: "minute"
+		},
+		description: [
+			"Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw."
+		],
+		level_up_description: "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
+	},
+	{
+		spell_id: 10,
+		name: "scorching ray",
+		level: {
+			value: 2,
+			text: "2nd Level"
+		},
+		school: SCHOOLS.EVOCATION,
+		classes: [CLASS_NAMES.SORCERER, CLASS_NAMES.WIZARD],
+		range: {
+			type: RANGE_TYPES.RANGE,
+			text: "120 feet",
+			value: 120,
+			unit: "feet"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: true,
+			material: false,
+			extra: null,
+			text: "V, S"
+		},
+		duration: {
+			type: DURATION_TYPES.INSTANTANEOUS,
+			text: "instantaneous"
+		},
+		description: [
+			"You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage."
+		],
+		level_up_description: "When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd."
+	},
+	{
+		spell_id: 11,
+		name: "dimension door",
+		level: {
+			value: 4,
+			text: "4th Level",
+		},
+		school: SCHOOLS.CONJURATION,
+		classes: [CLASS_NAMES.BARD, CLASS_NAMES.SORCERER, CLASS_NAMES.WARLOCK, CLASS_NAMES.WIZARD],
+		range: {
+			type: RANGE_TYPES.RANGE,
+			text: "500 feet",
+			value: 500,
+			unit: "feet"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: false,
+			material: false,
+			extra: null,
+			text: "V"
+		},
+		duration: {
+			type: DURATION_TYPES.INSTANTANEOUS,
+			text: "instantaneous"
+		},
+		description: [
+			"You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as “200 feet straight downward” or “upward to the northwest at a 45-degree angle, 300 feet. You can bring along objects as long as their weight doesn’t exceed what you can carry. You can also bring one willing creature of your size or smaller who is carrying gear up to its carrying capacity. The creature must be within 5 feet of you when you cast this spell.",
+			"If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take 4d6 force damage, and the spell fails to teleport you."
+		],
+		level_up_description: null
+	},
+	{
+		spell_id: 12,
+		name: "polymorph",
+		level: {
+			value: 4,
+			text: "4th Level"
+		},
+		school: SCHOOLS.TRANSMUTATION,
+		classes: [CLASS_NAMES.BARD, CLASS_NAMES.DRUID, CLASS_NAMES.SORCERER, CLASS_NAMES.WIZARD],
+		range: {
+			type: RANGE_TYPES.RANGE,
+			text: "60 feet",
+			value: 60,
+			unit: "feet"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: true,
+			material: true,
+			extra: "a caterpillar cocoon",
+			text: "V, S, M (a caterpillar cocoon)"
+		},
+		duration: {
+			type: DURATION_TYPES.CONCENTRATION,
+			text: "concentration, up to 1 hour",
+			value: 1,
+			unit: "hour"
+		},
+		description: [
+			"This spell transforms a creature that you can see within range into a new form. An unwilling creature must make a Wisdom saving throw to avoid the effect. A shapechanger automatically succeeds on this saving throw. The transformation lasts for the duration, or until the target drops to 0 hit points or dies. The new form can be any beast whose challenge rating is equal to or less than the target’s (or the target’s level, if it doesn’t have a challenge rating). The target’s game statistics, including mental ability scores, are replaced by the statistics of the chosen beast. It retains its alignment and personality.",
+			"The target assumes the hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 hit points, any excess damage carries over to its normal form. As long as the excess damage doesn’t reduce the creature’s normal form to 0 hit points, it isn’t knocked unconscious.",
+			"The creature is limited in the actions it can perform by the nature of its new form, and it can’t speak, cast spells, or take any other action that requires hands or speech.",
+			"The target’s gear melds into the new form. The creature can’t activate, use, wield, or otherwise benefit from any of its equipment."
+		],
+		level_up_description: null
+	},
+	{
+		spell_id: 13,
+		name: "Dream",
+		level: {
+			value: 5,
+			text: "5th Level"
+		},
+		school: SCHOOLS.ILLUSION,
+		classes: [CLASS_NAMES.BARD, CLASS_NAMES.WARLOCK, CLASS_NAMES.WIZARD],
+		range: {
+			type: RANGE_TYPES.SPECIAL,
+			text: "special"
+		},
+		casting_time: {
+			type: CASTING_TIME_TYPES.ACTION,
+			text: "1 action",
+			value: 1,
+			unit: "action"
+		},
+		components: {
+			vocal: true,
+			somatic: true,
+			material: true,
+			extra: "a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",
+			text: "V, S, M (a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird)"
+		},
+		duration: {
+			type: DURATION_TYPES.TIME,
+			text: "8 hours",
+			value: 8,
+			unit: "hour"
+		},
+		description: [
+			"This spell shapes a creature’s dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don’t sleep, such as elves, can’t be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can’t take actions or move.",
+			"If the target is asleep, the messenger appears in the target’s dreams and can converse with the target as long as it remains asleep, through the duration of the spell. The messenger can also shape the environment of the dream, creating landscapes, objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target’s dreams.",
+			"You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a Wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the duration of the target’s sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage.",
+			"If you have a body part, lock of hair, clipping from a nail, or similar portion of the target’s body, the target makes its saving throw with disadvantage."
+		],
+		level_up_description: null
+	}
 ];
 //
 // var books = [

@@ -111,5 +111,9 @@ export const DURATION_TYPES = {
 	CONCENTRATION: {
 		name: "concentration",
 		values: ["value", "unit"]
+	},
+	TIME: {
+		name: "time",
+		values: ["value", "unit"]
 	}
 };

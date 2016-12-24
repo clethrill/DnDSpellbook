@@ -37,7 +37,7 @@ class SpellDesc extends Component {
 				<div className="row">
 					<div className="twelve columns">
 						{spell_descriptions}
-						<p>{spell.level_up}</p>
+						<p>{spell.level_up_description}</p>
 					</div>
 				</div>
 				<div className="row">
