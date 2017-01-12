@@ -25,7 +25,7 @@ class App extends Component {
 
 		//default start book
 		let stored_books = [
-			{value: 1, name: "My Spellbook", spells: [], class: CLASS_NAMES.BARBARIAN, save: 8, attack: 2}
+			{value: 0, name: "My Spellbook", spells: [], class: CLASS_NAMES.BARBARIAN, save: 8, attack: 2}
 		];
 		if (typeof(Storage) !== "undefined" && localStorage.getItem("books")) {
 			stored_books = JSON.parse(localStorage.getItem("books"));
@@ -53,6 +53,7 @@ class App extends Component {
 		this.handleSwitchSpell = this.handleSwitchSpell.bind(this);
 		this.handleSwitchRightPaneState = this.handleSwitchRightPaneState.bind(this);
 
+		this.handleNewBook = this.handleNewBook.bind(this);
 		this.handleSaveBook = this.handleSaveBook.bind(this);
 		this.handleSaveSpellToBook = this.handleSaveSpellToBook.bind(this);
 		this.handleRemoveSpellFromBook = this.handleRemoveSpellFromBook.bind(this);
@@ -128,7 +129,7 @@ class App extends Component {
 				break;
 
 			case RIGHT_PANE_STATE.NEW_BOOK:
-				return_value = <NewBook />
+				return_value = <NewBook onSave={this.handleNewBook} />
 				break;
 
 			case RIGHT_PANE_STATE.EDIT_BOOK:
@@ -154,7 +155,8 @@ class App extends Component {
 			this.handleSwitchRightPaneState(RIGHT_PANE_STATE.NOTHING);
 		}
 	}
-	handleSwitchBook(book) {
+	handleSwitchBook(e) {
+		let book = e.target.value;
 		this.setState({current_book: book});
 	}
 	handleSwitchSpell(spell) {
@@ -162,6 +164,35 @@ class App extends Component {
 	}
 	handleSwitchRightPaneState(state) {
 		this.setState({current_right_pane_state: state});
+	}
+	handleNewBook(data) {
+		function getSmallestPositiveNumberNotInArray(array) {
+			let marker = 1;
+			while (array.indexOf(marker) >= 0) marker++;
+			return marker;
+		}
+
+		try {
+			//add some values to the book
+			let values = [];
+			for (let i=0; i<this.state.books.length; i++) values.push(this.state.books[i].value);
+			data.value = getSmallestPositiveNumberNotInArray(values);
+			data.spells = [];
+
+			//update in memory
+			let updated_books = this.state.books;
+			updated_books.push(data);
+			this.setState({books: updated_books, current_book: updated_books.length-1});
+
+			//store in local storage
+			this.saveData(updated_books);
+
+			//tell the  user about our successes
+			this.eatSnack("Book Created");
+		}
+		catch(e) {
+			console.error(e);
+		}
 	}
 	handleSaveBook(data) {
 		try {
@@ -174,7 +205,7 @@ class App extends Component {
 			this.saveData(updated_books);
 
 			//tell the user about our successes
-			this.eatSnack("Saved changes");
+			this.eatSnack("Saved Changes");
 		}
 		catch(e) {
 			console.error(e);
