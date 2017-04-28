@@ -41,7 +41,8 @@ class App extends Component {
 			current_spell_list: SPELL_LIST.ALL,
 			current_spell_id: 1,
 			current_book: 0,
-			current_right_pane_state: RIGHT_PANE_STATE.NOTHING
+			current_right_pane_state: RIGHT_PANE_STATE.NOTHING,
+			current_filter_show_state: false
 		};
 
 		this.getRightPaneJSX = this.getRightPaneJSX.bind(this);
@@ -148,6 +149,9 @@ class App extends Component {
 	getActiveBookModeButtonClass(mode) {
 		return (mode === this.state.current_right_pane_state) ? "button-primary" : "";
 	}
+	getFilterButtonClass() {
+		return (this.state.current_filter_show_state) ? "button-primary": "";
+	}
 	handleSwitchList(list) {
 		this.setState({current_spell_list: list});
 
@@ -164,6 +168,9 @@ class App extends Component {
 	}
 	handleSwitchRightPaneState(state) {
 		this.setState({current_right_pane_state: state});
+	}
+	handleSwitchFilter() {
+		this.setState({current_filter_show_state: !this.state.current_filter_show_state});
 	}
 	handleNewBook(data) {
 		function getSmallestPositiveNumberNotInArray(array) {
@@ -289,7 +296,10 @@ class App extends Component {
 								>{ALL_BUTTON_TEXT}</button>
 							</div>
 							<div className="four columns">
-								<button>{FILTER_BUTTON_TEXT}</button>
+								<button
+									className={this.getFilterButtonClass()}
+									onClick={this.handleSwitchFilter.bind(this)}
+								>{FILTER_BUTTON_TEXT}</button>
 							</div>
 						</div>
 					</div>
@@ -325,7 +335,12 @@ class App extends Component {
 
 				<div className="row">
 					<div className="six columns">
-						<SpellList spells={spell_options} onSwitchSpell={this.handleSwitchSpell} onSwitchRightPane={this.handleSwitchRightPaneState}/>
+						<SpellList
+							spells={spell_options}
+							onSwitchSpell={this.handleSwitchSpell}
+							onSwitchRightPane={this.handleSwitchRightPaneState}
+							showFilter={this.state.current_filter_show_state}
+						/>
 					</div>
 
 					<div className="six columns">

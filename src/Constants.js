@@ -30,8 +30,15 @@ export const RIGHT_PANE_STATE = {
 	EDIT_BOOK: "edit_book"
 };
 
+export const TERNARY_VALUES = {
+	INDETERMINATE: "idc",
+	TRUE: "yes",
+	FALSE: "no"
+};
+
 //Data
 export const CLASS_NAMES = {
+	ALL: "all",
 	BARBARIAN: "barbarian",
 	BARD: "bard",
 	CLERIC: "cleric",
@@ -87,6 +94,10 @@ export const RANGE_TYPES = {
 export const CASTING_TIME_TYPES = {
 	ACTION: {
 		name: "action",
+		values: ["value", "unit"]
+	},
+	BONUS: {
+		name: "bonus action",
 		values: ["value", "unit"]
 	},
 	REACTION: {

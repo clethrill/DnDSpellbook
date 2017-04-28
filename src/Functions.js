@@ -4,10 +4,10 @@ export function BinarySearch(array, value, object_property_name) {
 
 	while (array[marker][object_property_name] !== value) {
 		if (value < array[marker][object_property_name]) {
-			marker = marker - movement;
+			marker -=  movement;
 		}
 		else {
-			marker = marker + movement;
+			marker +=  movement;
 		}
 		movement = Math.ceil(movement / 2);
 	}
