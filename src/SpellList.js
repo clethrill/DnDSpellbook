@@ -90,7 +90,7 @@ class SpellList extends Component {
 		if (this.state.casting.length > 0 && this.state.casting.indexOf(spell.casting_time.type.name) < 0) {
 			return false;
 		}
-		if (this.state.duration.length > 0 && this.duration.range.indexOf(spell.duration.type.name) < 0) {
+		if (this.state.duration.length > 0 && this.state.duration.indexOf(spell.duration.type.name) < 0) {
 			return false;
 		}
 
@@ -147,11 +147,11 @@ class SpellList extends Component {
 			});
 
 			return (
-				<div className="row">
+				<div className="row filters">
 					<div className="twelve columns">
 						<div className="row">
 							<div className="three columns">
-								<label>Class</label>
+								<label className="label">Class</label>
 							</div>
 							<div className="nine columns">
 								<select id="class_filter" value={this.state.classes} onChange={this.handleClassChange}>
@@ -161,7 +161,7 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Levels</label>
+								<label className="label">Levels</label>
 							</div>
 							<div className="nine columns">
 								<MinMax min={0} max={9} onChange={this.handleMinMaxChange.bind(this, "levels")}/>
@@ -169,22 +169,22 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Components</label>
+								<label className="label">Components</label>
 							</div>
 							<div className="one columns">
-								<label>V</label>
+								<label className="label">V</label>
 							</div>
 							<div className="two columns">
 								<TernaryCheckbox onChange={this.handleTernaryChange.bind(this, "components", "vocal")} values={this.ternary_values} />
 							</div>
 							<div className="one columns">
-								<label>S</label>
+								<label className="label">S</label>
 							</div>
 							<div className="two columns">
 								<TernaryCheckbox onChange={this.handleTernaryChange.bind(this, "components", "somatic")} values={this.ternary_values} />
 							</div>
 							<div className="one columns">
-								<label>M</label>
+								<label className="label">M</label>
 							</div>
 							<div className="two columns">
 								<TernaryCheckbox onChange={this.handleTernaryChange.bind(this, "components", "material")} values={this.ternary_values} />
@@ -192,7 +192,7 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>School</label>
+								<label className="label">School</label>
 							</div>
 							<div className="nine columns">
 								<Select name="school-filter" multi={true} value={this.state.schools} options={school_options} onChange={this.handleMultiSelectChange.bind(this, "schools")} />
@@ -200,7 +200,7 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Range</label>
+								<label className="label">Range</label>
 							</div>
 							<div className="nine columns">
 								<Select name="range-filter" multi={true} value={this.state.range} options={range_options} onChange={this.handleMultiSelectChange.bind(this, "range")} />
@@ -208,7 +208,7 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Casting Time</label>
+								<label className="label">Casting Time</label>
 							</div>
 							<div className="nine columns">
 								<Select name="casting-filter" multi={true} value={this.state.casting} options={casting_options} onChange={this.handleMultiSelectChange.bind(this, "casting")} />
@@ -216,7 +216,7 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Duration</label>
+								<label className="label">Duration</label>
 							</div>
 							<div className="nine columns">
 								<Select name="duration-filter" multi={true} value={this.state.duration} options={duration_options} onChange={this.handleMultiSelectChange.bind(this, "duration")} />
@@ -224,13 +224,13 @@ class SpellList extends Component {
 						</div>
 						<div className="row">
 							<div className="three columns">
-								<label>Concentration</label>
+								<label className="label">Concentration</label>
 							</div>
 							<div className="three columns">
 								<TernaryCheckbox onChange={this.handleTernaryChange.bind(this, "concentration")} values={this.ternary_values} />
 							</div>
 							<div className="three columns">
-								<label>Ritual</label>
+								<label className="label">Ritual</label>
 							</div>
 							<div className="three columns">
 								<TernaryCheckbox onChange={this.handleTernaryChange.bind(this, "ritual")} values={this.ternary_values} />

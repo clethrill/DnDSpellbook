@@ -25,7 +25,7 @@ class App extends Component {
 
 		//default start book
 		let stored_books = [
-			{value: 0, name: "My Spellbook", spells: [], class: CLASS_NAMES.BARBARIAN, save: 8, attack: 2}
+			{value: 0, name: "My Spellbook", spells: [], class: CLASS_NAMES.ALL, save: 8, attack: 2}
 		];
 		if (typeof(Storage) !== "undefined" && localStorage.getItem("books")) {
 			stored_books = JSON.parse(localStorage.getItem("books"));
@@ -56,6 +56,7 @@ class App extends Component {
 
 		this.handleNewBook = this.handleNewBook.bind(this);
 		this.handleSaveBook = this.handleSaveBook.bind(this);
+		this.handleDeleteBook = this.handleDeleteBook.bind(this);
 		this.handleSaveSpellToBook = this.handleSaveSpellToBook.bind(this);
 		this.handleRemoveSpellFromBook = this.handleRemoveSpellFromBook.bind(this);
 	}
@@ -134,7 +135,7 @@ class App extends Component {
 				break;
 
 			case RIGHT_PANE_STATE.EDIT_BOOK:
-				return_value = <EditBook book={this.state.books[this.state.current_book]} onSave={this.handleSaveBook} />
+				return_value = <EditBook book={this.state.books[this.state.current_book]} onSave={this.handleSaveBook} onDelete={this.handleDeleteBook} />
 				break;
 
 			default:
@@ -160,8 +161,16 @@ class App extends Component {
 		}
 	}
 	handleSwitchBook(e) {
-		let book = e.target.value;
+		let book = Number(e.target.value);
 		this.setState({current_book: book});
+
+		// we change the right pane state to nothing then back to edit book to refresh the data in the edit book
+		if (this.state.current_right_pane_state === RIGHT_PANE_STATE.EDIT_BOOK) {
+			this.setState({current_right_pane_state: RIGHT_PANE_STATE.NOTHING});
+			setTimeout(() => {
+				this.setState({current_right_pane_state: RIGHT_PANE_STATE.EDIT_BOOK});
+			}, 100);
+		}
 	}
 	handleSwitchSpell(spell) {
 		this.setState({current_spell_id: spell});
@@ -189,7 +198,7 @@ class App extends Component {
 			//update in memory
 			let updated_books = this.state.books;
 			updated_books.push(data);
-			this.setState({books: updated_books, current_book: updated_books.length-1});
+			this.setState({books: updated_books, current_book: updated_books.length-1, current_right_pane_state: RIGHT_PANE_STATE.EDIT_BOOK});
 
 			//store in local storage
 			this.saveData(updated_books);
@@ -199,6 +208,7 @@ class App extends Component {
 		}
 		catch(e) {
 			console.error(e);
+			this.eatSnack("Failed to Create Book");
 		}
 	}
 	handleSaveBook(data) {
@@ -216,6 +226,35 @@ class App extends Component {
 		}
 		catch(e) {
 			console.error(e);
+			this.eatSnack("Failed to Save Changes");
+		}
+	}
+	handleDeleteBook(data) {
+		try {
+			//delete in memory
+			let updated_books = this.state.books;
+			updated_books.splice(this.state.current_book, 1);
+			//if we deleted the last one let's add a new generic one
+			if (updated_books.length === 0) {
+				updated_books = [{value: 0, name: "My Spellbook", spells: [], class: CLASS_NAMES.ALL, save: 8, attack: 2}];
+			}
+			//go through and revalue all books
+			else {
+				for (var i=0; i<updated_books.length; i++) {
+					updated_books[i].value = i;
+				}
+			}
+			this.setState({books: updated_books, current_book: 0});
+
+			//store in local storage
+			this.saveData(updated_books);
+
+			//tell the user about our successes
+			this.eatSnack("Deleted Book '" + data.name + "'");
+		}
+		catch(e) {
+			console.error(e);
+			this.eatSnack("Failed to Delete Book");
 		}
 	}
 	handleSaveSpellToBook(spell_id) {

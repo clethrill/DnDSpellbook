@@ -168,7 +168,7 @@ var data = [
 			text: "touch"
 		},
 		casting_time: {
-			type: RANGE_TYPES.ACTION,
+			type: CASTING_TIME_TYPES.ACTION,
 			text: "1 action",
 			value: 1,
 			unit: "action"

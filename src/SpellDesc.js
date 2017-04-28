@@ -12,10 +12,10 @@ class SpellDesc extends Component {
 
 		let add_or_remove_button = false;
 		if (this.props.inBook === false) {
-			add_or_remove_button = <button onClick={this.props.onAdd.bind(this, spell.spell_id)}>{ADD_SPELL_BUTTON_TEXT}</button>
+			add_or_remove_button = <button className="button-primary green" onClick={this.props.onAdd.bind(this, spell.spell_id)}>{ADD_SPELL_BUTTON_TEXT}</button>
 		}
 		else if (this.props.inBook === true) {
-			add_or_remove_button = <button onClick={this.props.onRemove.bind(this, spell.spell_id)}>{REMOVE_SPELL_BUTTON_TEXT}</button>
+			add_or_remove_button = <button className="button-primary red" onClick={this.props.onRemove.bind(this, spell.spell_id)}>{REMOVE_SPELL_BUTTON_TEXT}</button>
 		}
 
 		return (

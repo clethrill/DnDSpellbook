@@ -87,7 +87,7 @@ class NewBook extends Component {
 
 				<div className="row">
 					<div className="twelve columns">
-						<button onClick={this.props.onSave.bind(this, this.state)}>{SAVE_BUTTON_TEXT}</button>
+						<button className="button-primary green" onClick={this.props.onSave.bind(this, this.state)}>{SAVE_BUTTON_TEXT}</button>
 					</div>
 				</div>
 			</section>

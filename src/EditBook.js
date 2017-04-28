@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {SAVE_BUTTON_TEXT, CLASS_NAMES} from './Constants.js';
+import {SAVE_BUTTON_TEXT, DELETE_BUTTON_TEXT, CLASS_NAMES} from './Constants.js';
 
 class EditBook extends Component {
 	constructor(props) {
@@ -22,11 +22,11 @@ class EditBook extends Component {
 		this.setState({class: value});
 	}
 	handleSaveChange(e) {
-		let value = e.target.value;
+		let value = Number(e.target.value);
 		this.setState({save: value});
 	}
 	handleAttackChange(e) {
-		let value = e.target.value;
+		let value = Number(e.target.value);
 		this.setState({attack: value});
 	}
 	render() {
@@ -81,8 +81,11 @@ class EditBook extends Component {
 				</div>
 
 				<div className="row">
-					<div className="twelve columns">
-						<button onClick={this.props.onSave.bind(this, this.state)}>{SAVE_BUTTON_TEXT}</button>
+					<div className="eight columns">
+						<button className="button-primary green" onClick={this.props.onSave.bind(this, this.state)}>{SAVE_BUTTON_TEXT}</button>
+					</div>
+					<div className="four columns">
+						<button onClick={this.props.onDelete.bind(this, this.state)}>{DELETE_BUTTON_TEXT}</button>
 					</div>
 				</div>
 			</section>

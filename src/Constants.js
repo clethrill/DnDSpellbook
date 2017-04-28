@@ -11,6 +11,7 @@ export const DURATION_TEXT = "Duration";
 export const NEW_BOOK_BUTTON_TEXT = "New Book";
 export const EDIT_BUTTON_TEXT = "Edit";
 export const SAVE_BUTTON_TEXT = "Save";
+export const DELETE_BUTTON_TEXT = "Delete";
 export const ADD_SPELL_BUTTON_TEXT = "Add to Spellbook";
 export const REMOVE_SPELL_BUTTON_TEXT = "Remove from Spellbook";
 export const KNOWN_BUTTON_TEXT = "Known Spells";
