@@ -4,6 +4,12 @@ import SpellList from './SpellList.js';
 import SpellDesc from './SpellDesc.js';
 import NewBook from './NewBook.js';
 import EditBook from './EditBook.js';
+//todo
+/*
+- make clicking on a spell anchor to the right pane (for mobile)
+- add a top button to the right pane
+- burger menu
+*/
 
 import {
 	SPELL_LIST,
@@ -298,6 +304,10 @@ class App extends Component {
 			console.error(e);
 		}
 	}
+	scrollToTop() {
+		console.log("HELLO");
+		window.scrollTo(0,0);
+	}
 	render() {
 		let spellbook_options = this.state.books.map((value, index) => {
 			return <option key={index} value={value.value}>{value.name}</option>
@@ -315,12 +325,39 @@ class App extends Component {
 			<main className="container">
 
 				<div className="row">
-					<div className="six columns">
+
+					<div className="twelve column">
 						<div className="row">
 							<div className="twelve columns">
 								<h1>{TITLE}</h1>
 							</div>
 						</div>
+						<div className="row">
+							<div className="four columns">
+								<button
+									className={this.getActiveBookModeButtonClass(RIGHT_PANE_STATE.NEW_BOOK)}
+									onClick={this.handleSwitchRightPaneState.bind(this, RIGHT_PANE_STATE.NEW_BOOK)}
+								>{NEW_BOOK_BUTTON_TEXT}</button>
+							</div>
+							<div className="six columns">
+								<select value={current_book.value} onChange={this.handleSwitchBook}>
+									{spellbook_options}
+								</select>
+							</div>
+							<div className="two columns">
+								<button
+									className={this.getActiveBookModeButtonClass(RIGHT_PANE_STATE.EDIT_BOOK)}
+									onClick={this.handleSwitchRightPaneState.bind(this, RIGHT_PANE_STATE.EDIT_BOOK)}
+								>{EDIT_BUTTON_TEXT}</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div className="row">
+
+					<div className="six columns higher">
 						<div className="row">
 							<div className="four columns">
 								<button
@@ -341,50 +378,32 @@ class App extends Component {
 								>{FILTER_BUTTON_TEXT}</button>
 							</div>
 						</div>
-					</div>
-
-					<div className="six columns">
-						<div className="row spacer" />
 						<div className="row">
-							<div className="four columns">
-								<button
-									className={this.getActiveBookModeButtonClass(RIGHT_PANE_STATE.NEW_BOOK)}
-									onClick={this.handleSwitchRightPaneState.bind(this, RIGHT_PANE_STATE.NEW_BOOK)}
-								>{NEW_BOOK_BUTTON_TEXT}</button>
-							</div>
-							<div className="six columns">
-								<select value={current_book.value} onChange={this.handleSwitchBook}>
-									{spellbook_options}
-								</select>
-							</div>
-							<div className="two columns">
-								<button
-									className={this.getActiveBookModeButtonClass(RIGHT_PANE_STATE.EDIT_BOOK)}
-									onClick={this.handleSwitchRightPaneState.bind(this, RIGHT_PANE_STATE.EDIT_BOOK)}
-								>{EDIT_BUTTON_TEXT}</button>
+							<div className="twelve column">
+								<SpellList
+									spells={spell_options}
+									onSwitchSpell={this.handleSwitchSpell}
+									onSwitchRightPane={this.handleSwitchRightPaneState}
+									showFilter={this.state.current_filter_show_state}
+								/>
 							</div>
 						</div>
+					</div>
+
+					<div className="six columns sticky">
 						<div className="row">
 							<div className="four columns capitalise vertical-center"><strong>Class:</strong> {current_book.class}</div>
 							<div className="four columns capitalise vertical-center"><strong>Save DC:</strong> {current_book.save}</div>
 							<div className="four columns capitalise vertical-center"><strong>Attack Bonus:</strong> {current_book.attack}</div>
 						</div>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="six columns">
-						<SpellList
-							spells={spell_options}
-							onSwitchSpell={this.handleSwitchSpell}
-							onSwitchRightPane={this.handleSwitchRightPaneState}
-							showFilter={this.state.current_filter_show_state}
-						/>
+						<div className="row">
+							<div className="twelve column">
+								{right_pane}
+							</div>
+						</div>
+						<div className="to-top" onClick={this.scrollToTop}>Top</div>
 					</div>
 
-					<div className="six columns">
-						{right_pane}
-					</div>
 				</div>
 
 				<section>

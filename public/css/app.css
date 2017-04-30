@@ -91,3 +91,19 @@ button.button-primary.green {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+/* all the sticky right pane stuff */
+.to-top {
+	position: absolute;
+	right: 0;
+	padding: 10px 20px;
+	background-color: #666;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: -1px;
+}

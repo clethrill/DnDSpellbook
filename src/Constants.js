@@ -127,5 +127,9 @@ export const DURATION_TYPES = {
 	TIME: {
 		name: "time",
 		values: ["value", "unit"]
+	},
+	UNTIL_DISPELLED: {
+		name: "until dispelled",
+		values: []
 	}
 };
