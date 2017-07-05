@@ -6,9 +6,9 @@ import NewBook from './NewBook.js';
 import EditBook from './EditBook.js';
 //todo
 /*
-- make clicking on a spell anchor to the right pane (for mobile)
-- add a top button to the right pane
-- burger menu
+- allow right pane to be scrollable if it's height is larger than devices screens height
+- sorting
+- add custom spell functionality
 */
 
 import {
@@ -65,6 +65,8 @@ class App extends Component {
 		this.handleDeleteBook = this.handleDeleteBook.bind(this);
 		this.handleSaveSpellToBook = this.handleSaveSpellToBook.bind(this);
 		this.handleRemoveSpellFromBook = this.handleRemoveSpellFromBook.bind(this);
+
+		this.scrollToTop = this.scrollToTop.bind(this);
 	}
 	eatSnack(string) {
 
@@ -305,8 +307,10 @@ class App extends Component {
 		}
 	}
 	scrollToTop() {
-		console.log("HELLO");
-		window.scrollTo(0,0);
+		console.log(this.scrollRef.scrollTop);
+		this.scrollRef.scrollTop = 0;
+		//document.getElementById('left_pane').scrollTo(0,0);
+		//window.scrollTo(0,0);
 	}
 	render() {
 		let spellbook_options = this.state.books.map((value, index) => {
@@ -355,9 +359,9 @@ class App extends Component {
 
 				</div>
 
-				<div className="row">
+				<div className="row dyna-height">
 
-					<div className="six columns higher">
+					<div className="six columns higher indiv-scroll" ref={(el) => {this.scrollRef = el;}}>
 						<div className="row">
 							<div className="four columns">
 								<button
@@ -388,9 +392,10 @@ class App extends Component {
 								/>
 							</div>
 						</div>
+						<div className="to-top" onClick={this.scrollToTop}>Top</div>;
 					</div>
 
-					<div className="six columns sticky">
+					<div className="six columns sticky indiv-scroll">
 						<div className="row">
 							<div className="four columns capitalise vertical-center"><strong>Class:</strong> {current_book.class}</div>
 							<div className="four columns capitalise vertical-center"><strong>Save DC:</strong> {current_book.save}</div>
@@ -401,7 +406,6 @@ class App extends Component {
 								{right_pane}
 							</div>
 						</div>
-						<div className="to-top" onClick={this.scrollToTop}>Top</div>
 					</div>
 
 				</div>

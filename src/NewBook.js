@@ -35,8 +35,6 @@ class NewBook extends Component {
 		this.setState({attack: value});
 	}
 	render() {
-		let book = this.state;
-
 		let class_options = Object.values(CLASS_NAMES).map((value, index) => {
 			return <option key={index} value={value}>{value}</option>
 		});

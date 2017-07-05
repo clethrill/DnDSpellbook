@@ -64,7 +64,7 @@ class SpellList extends Component {
 		}
 
 		//check class
-		if (this.state.class != "all" && spell.classes.indexOf(this.state.class) < 0) {
+		if (this.state.class !== "all" && spell.classes.indexOf(this.state.class) < 0) {
 			return false;
 		}
 
@@ -255,6 +255,7 @@ class SpellList extends Component {
 					</tr>
 				);
 			}
+			return <tr style={{display: "none"}} />;
 		});
 
 		let filters = this.drawFilters();

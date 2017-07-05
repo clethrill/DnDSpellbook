@@ -1,3 +1,15 @@
+#element::-webkit-scrollbar {
+    display: none;
+}
+
+.dyna-height {
+	height: 100vh;
+}
+.indiv-scroll {
+	height: inherit;
+	overflow-y: auto;
+}
+
 button, .button {
 	width: 100%;
 }
@@ -94,8 +106,9 @@ button.button-primary.green {
 
 /* all the sticky right pane stuff */
 .to-top {
-	position: absolute;
-	right: 0;
+	position: fixed;
+	bottom: 0;
+	left: 0;
 	padding: 10px 20px;
 	background-color: #666;
 	color: #fff;
